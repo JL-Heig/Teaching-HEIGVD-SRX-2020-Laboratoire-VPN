@@ -30,8 +30,8 @@ Dans ce travail de laboratoire, vous allez configurer des routeurs Cisco émulé
 -	Capture Sniffer avec filtres précis sur la communication à épier
 -	Activation du mode « debug » pour certaines fonctions du routeur
 -	Observation des protocoles IPSec
- 
- 
+
+
 ## Matériel
 
 La manière la plus simple de faire ce laboratoire est dans les machines des salles de labo. Le logiciel d'émulation c'est eve-ng. Vous trouverez un [guide très condensé](files/Fonctionnement_EVE-NG.pdf) pour l'utilisation de eve-ng ici.
@@ -92,7 +92,7 @@ Vérifier que le projet a été importé correctement. Pour cela, nous allons co
 
 ### A faire...
 
-- Contrôlez l’état de toutes vos interfaces dans les deux routeurs et le routeur qui simule l'Internet - Pour contrôler l’état de vos interfaces (dans R1, par exmeple) les commandes suivantes sont utiles :
+- Contrôlez l’état de toutes vos interfaces dans les deux routeurs et le routeur qui simule l'Internet - Pour contrôler l’état de vos interfaces (dans R1, par exemple) les commandes suivantes sont utiles :
 
 ```
 R1# show ip interface brief
@@ -109,6 +109,16 @@ Un « protocol » différent de `up` indique la plupart du temps que l’interfa
 ---
 
 **Réponse :**  
+
+![](images/Q1baseConfigRouteurs.png)
+
+
+
+Les seules interfaces "down" sont celles qu'on n'utilise pas durant ce labo. On voit bien que toutes les interfaces employés dans la topologie réseau sont actives.
+
+On constate donc que tout va bien et qu'aucun problème n'est à signaler
+
+
 
 ---
 
@@ -139,13 +149,33 @@ Pour votre topologie il est utile de contrôler la connectivité entre :
 - R1 vers ISP1 (193.100.100.254)
 - R2 vers ISP2 (193.200.200.254)
 - R2 (193.200.200.1) vers RX1 (193.100.100.1) via Internet
-- R2 (172.17.1.1) et votre poste « VPC »
+- R2 (172.17.1.1) et votre poste « VPC » (172.17.1.100)
 
 **Question 2: Tous vos pings ont-ils passé ? Si non, est-ce normal ? Dans ce cas, trouvez la source du problème et corrigez-la.**
 
 ---
 
 **Réponse :**  
+
+Les pings ne passaient pas avant d'avoir tapé la commande "ip dhcp" sur le VPC car ce dernier n'avait pas encore reçu d'adresse ip du DHCP.
+
+
+
+De ISP1 à R1 et de ISP2 à R2
+
+![](images/Q2ISPR1andISPR2.png)
+
+De R1 à ISP1 et de R1 à R2
+
+![](images/Q2R1ISP1andR1R2.png)
+
+De R2 à à ISP2, de R2 à R1 et de R2 à VPC
+
+![](images/Q2R2ISP2andR2R1andR2VPC.png)
+
+De VPC à R2
+
+![](images/Q2VPCR2.png)
 
 ---
 
@@ -163,12 +193,19 @@ Pour déclencher et pratiquer les captures vous allez « pinger » votre routeur
 -	Une trace sniffer (Wireshark) à la sortie du routeur R2 vers Internet. Si vous ne savez pas utiliser Wireshark avec eve-ng, référez-vous au document explicatif eve-ng. Le filtre de **capture** (attention, c'est un filtre de **capture** et pas un filtre d'affichage) suivant peut vous aider avec votre capture : `ip host 193.100.100.1`. 
 -	Les messages de R1 avec `debug ip icmp`.
 
-
 **Question 3: Montrez vous captures**
 
 ---
 
 **Screenshots :**  
+
+Ping debug R1
+
+![](images/Q3R1.png)
+
+Wireshark capture de R2 e0/0
+
+![](images/Q3wiresharkR2.png)
 
 ---
 
@@ -241,14 +278,31 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 
 **Réponse :**  
 
----
+R1 policy :
 
+![](images/Q4-R1-policy.png)
+
+R2 policy :
+
+![](images/Q4-R2-policy.png)
+
+---
 
 **Question 5: Utilisez la commande `show crypto isakmp key` et faites part de vos remarques :**
 
 ---
 
 **Réponse :**  
+
+R1 key : 
+
+![](images/Q5-R1-key.png)
+
+R2 key : 
+
+![](images/Q5-R2-key.png)
+
+La clé "cisco-1" n'est pas  très sécurisé.
 
 ---
 
@@ -343,6 +397,32 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 
 **Réponse :**  
 
+R1 isakmp UP
+
+![](images/Q6R1-isakmp.png)
+
+R1 crypto map
+
+![](images/Q6R1-map.png)
+
+R2 isakmp UP
+
+![](images/Q6R2-isakmp.png)
+
+R2 crypto map
+
+![](images/Q6R2-map.png)
+
+R1 icmp debug
+
+![](images/Q6R1-icmp-debug.png)
+
+R2 wireshark
+
+![](images/Q6Capture.png)
+
+
+
 ---
 
 **Question 7: Reportez dans votre rapport une petite explication concernant les différents « timers » utilisés par IKE et IPsec dans cet exercice (recherche Web). :**
@@ -350,6 +430,12 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 ---
 
 **Réponse :**  
+
+IKE : Lifetime, cela représente le temps de vie des SA et KeepAlive qui représente quand les paquets doivent être envoyés.
+
+
+
+IPSec : Lifetime, cela représente le temps de vie des SA et Idle-time qui représente le temps d'inactivité.
 
 ---
 
@@ -363,16 +449,15 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 ---
 
-**Réponse :**  
+**Réponse :**  IKE et ESP
 
 ---
-
 
 **Question 9: Expliquez si c’est un mode tunnel ou transport.**
 
 ---
 
-**Réponse :**  
+**Réponse :**  Mode tunnel, car dans les commandes de configuration de R2 on tape "mode tunnel".  On ne peut également que mettre un VPN en mode tunnel si on veut relier 2 réseaux privés.
 
 ---
 
@@ -381,7 +466,9 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 ---
 
-**Réponse :**  
+**Réponse :**  On utilise l'algorithme cryptographique "AES", on le décrit souvent sur plusieurs de nos commandes.
+
+![](images/Q10-Q11.png)
 
 ---
 
@@ -392,13 +479,18 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 **Réponse :**  
 
----
+On utilise l'algorithme cryptographique HMAC accompagné de SHA1.
 
+![](images/Q10-Q11.png)
+
+---
 
 **Question 12: Expliquez quelles sont les parties du paquet qui sont protégées en intégrité. Donnez l’algorithme cryptographique correspondant.**
 
 ---
 
-**Réponse :**  
+**Réponse :**  Un paquet se doit d'être intègre pour être authentifié, dès lors, toutes les parties authentifiées seront protégées en intégrité.
+
+On utilise l'algorithme cryptographique HMAC accompagné de SHA1 également.
 
 ---
