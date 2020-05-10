@@ -110,7 +110,7 @@ Un « protocol » différent de `up` indique la plupart du temps que l’interfa
 
 **Réponse :**  
 
-![](images/Q1baseConfigRouteurs.png)
+![](images/Q1baseConfigRouteurs.PNG)
 
 
 
@@ -163,19 +163,19 @@ Les pings ne passaient pas avant d'avoir tapé la commande "ip dhcp" sur le VPC 
 
 De ISP1 à R1 et de ISP2 à R2
 
-![](images/Q2ISPR1andISPR2.png)
+![](images/Q2ISPR1andISPR2.PNG)
 
 De R1 à ISP1 et de R1 à R2
 
-![](images/Q2R1ISP1andR1R2.png)
+![](images/Q2R1ISP1andR1R2.PNG)
 
 De R2 à à ISP2, de R2 à R1 et de R2 à VPC
 
-![](images/Q2R2ISP2andR2R1andR2VPC.png)
+![](images/Q2R2ISP2andR2R1andR2VPC.PNG)
 
 De VPC à R2
 
-![](images/Q2VPCR2.png)
+![](images/Q2VPCR2.PNG)
 
 ---
 
@@ -201,11 +201,11 @@ Pour déclencher et pratiquer les captures vous allez « pinger » votre routeur
 
 Ping debug R1
 
-![](images/Q3R1.png)
+![](images/Q3R1.PNG)
 
 Wireshark capture de R2 e0/0
 
-![](images/Q3wiresharkR2.png)
+![](images/Q3wiresharkR2.PNG)
 
 ---
 
@@ -280,11 +280,11 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 
 R1 policy :
 
-![](images/Q4-R1-policy.png)
+![](images/Q4-R1-policy.PNG)
 
 R2 policy :
 
-![](images/Q4-R2-policy.png)
+![](images/Q4-R2-policy.PNG)
 
 ---
 
@@ -296,11 +296,11 @@ R2 policy :
 
 R1 key : 
 
-![](images/Q5-R1-key.png)
+![](images/Q5-R1-key.PNG)
 
 R2 key : 
 
-![](images/Q5-R2-key.png)
+![](images/Q5-R2-key.PNG)
 
 La clé "cisco-1" n'est pas  très sécurisé.
 
@@ -399,27 +399,27 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 
 R1 isakmp UP
 
-![](images/Q6R1-isakmp.png)
+![](images/Q6R1-isakmp.PNG)
 
 R1 crypto map
 
-![](images/Q6R1-map.png)
+![](images/Q6R1-map.PNG)
 
 R2 isakmp UP
 
-![](images/Q6R2-isakmp.png)
+![](images/Q6R2-isakmp.PNG)
 
 R2 crypto map
 
-![](images/Q6R2-map.png)
+![](images/Q6R2-map.PNG)
 
 R1 icmp debug
 
-![](images/Q6R1-icmp-debug.png)
+![](images/Q6R1-icmp-debug.PNG)
 
 R2 wireshark
 
-![](images/Q6Capture.png)
+![](images/Q6Capture.PNG)
 
 
 
@@ -468,7 +468,7 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 **Réponse :**  On utilise l'algorithme cryptographique "AES", on le décrit souvent sur plusieurs de nos commandes.
 
-![](images/Q10-Q11.png)
+![](images/Q10-Q11.PNG)
 
 ---
 
@@ -481,7 +481,7 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 
 On utilise l'algorithme cryptographique HMAC accompagné de SHA1.
 
-![](images/Q10-Q11.png)
+![](images/Q10-Q11.PNG)
 
 ---
 
