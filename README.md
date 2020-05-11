@@ -286,6 +286,8 @@ R2 policy :
 
 ![](images/Q4-R2-policy.PNG)
 
+On remarque que certains paramètre de "sécurité" ne sont pas assez forts, notamment 3DES et Diffie-Hellman #5. Il faudrait employer des algorithmes plus forts pour garantir une meilleure sécurité.
+
 ---
 
 **Question 5: Utilisez la commande `show crypto isakmp key` et faites part de vos remarques :**
@@ -471,7 +473,6 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 ![](images/Q10-Q11.PNG)
 
 ---
-
 
 **Question 11: Expliquez quelles sont les parties du paquet qui sont authentifiées. Donnez l’algorithme cryptographique correspondant.**
 
